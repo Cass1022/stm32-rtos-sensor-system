@@ -5,7 +5,7 @@ A real-time multi-sensor monitoring system built on the STM32F446RE
 from multiple sensors, displays live readings on an OLED screen, and 
 streams data over UART to a host PC.
 
-<img width="333" height="151" alt="Screenshot 2026-04-05 at 9 31 51 PM" src="https://github.com/user-attachments/assets/a17d8e3a-ee39-4778-a96b-f16c270e3112" />
+<img width="835" height="374" alt="Screenshot 2026-04-05 at 9 32 55 PM" src="https://github.com/user-attachments/assets/97912ca8-e626-4afb-8195-307c030c12be" />
 
 ## Hardware
 - STM32F446RE Nucleo-64
