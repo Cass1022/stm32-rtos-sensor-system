@@ -7,6 +7,11 @@ streams data over UART to a host PC.
 
 <img width="835" height="374" alt="Screenshot 2026-04-05 at 9 32 55 PM" src="https://github.com/user-attachments/assets/97912ca8-e626-4afb-8195-307c030c12be" />
 
+Sensor data is acquired by the Sensor Task on a fixed 50ms schedule 
+and passed via FreeRTOS queues to the Processing Task for filtering. 
+Processed data is then distributed to the Display Task (SSD1306 over 
+I2C) and the Comms Task (UART).
+
 ## Hardware
 - STM32F446RE Nucleo-64
 - HC-SR04 ultrasonic distance sensor
