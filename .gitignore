@@ -1,5 +1,11 @@
+# led-blink
+led-blink/Debug/
+led-blink/Release/
+
 # Prerequisites
 *.d
+*.bin
+*.cyclo
 
 # Object files
 *.o
