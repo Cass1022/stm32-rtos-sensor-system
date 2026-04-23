@@ -59,6 +59,14 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+#ifdef __GNUC__
+int __io_putchar(int ch)
+{
+    HAL_UART_Transmit(&huart2, (uint8_t *)&ch, 1, HAL_MAX_DELAY);
+    return ch;
+}
+#endif
+
 void delay_us(uint16_t us)
 {
 	__HAL_TIM_SET_COUNTER(&htim1, 0);
@@ -105,6 +113,30 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+	  delay_us(10);
+	  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+
+	  // Wait for echo with timeout
+	  uint32_t timeout = 0;
+	  while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8) == GPIO_PIN_RESET)
+	  {
+	      timeout++;
+	      if(timeout > 30000) break;
+	  }
+
+	  // Measure echo duration
+	  __HAL_TIM_SET_COUNTER(&htim1, 0);
+	  while(HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_8) == GPIO_PIN_SET);
+	  uint32_t elapsed = __HAL_TIM_GET_COUNTER(&htim1);
+
+	  // Calculate and print distance
+	  float distance = elapsed * 0.034 / 2.0;
+	  printf("Distance: %.1f cm\r\n", distance);
+
+	  HAL_Delay(100);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -172,7 +204,7 @@ static void MX_TIM1_Init(void)
 
   /* USER CODE END TIM1_Init 1 */
   htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 179;
+  htim1.Init.Prescaler = 80;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 65535;
   htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
