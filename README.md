@@ -24,6 +24,6 @@ I2C) and the Comms Task (UART).
 - HAL drivers
 
 ## Status
-In progress - Nucleo, BME280, and OLED display have arrived!. Just working with just the ultrasonic sensor for now, working out some issues with the measurements.
+In progress - Ultrasonic sensor is attached and accurate, OLED screen is working and displaying the distance in centimeters.
 
 
